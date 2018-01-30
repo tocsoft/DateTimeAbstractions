@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2020
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tocsoft.DateTimeAbstractions", "Tocsoft.Clock\Tocsoft.DateTimeAbstractions.csproj", "{48B75F8E-2EFC-4A36-8B4C-EB12EA1459E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tocsoft.DateTimeAbstractions", "Tocsoft.Clock\Tocsoft.DateTimeAbstractions.csproj", "{48B75F8E-2EFC-4A36-8B4C-EB12EA1459E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tocsoft.DateTimeAbstractions.Tests", "Tocsoft.DateTimeAbstractions.Tests\Tocsoft.DateTimeAbstractions.Tests.csproj", "{F59B2FEE-7E98-4DE5-8BBA-3D628FB2F615}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tocsoft.DateTimeAbstractions.Tests", "Tocsoft.DateTimeAbstractions.Tests\Tocsoft.DateTimeAbstractions.Tests.csproj", "{F59B2FEE-7E98-4DE5-8BBA-3D628FB2F615}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tocsoft.DateTimeAbstractions.Analyzer", "Tocsoft.DateTimeAbstractions.Analyzer\Tocsoft.DateTimeAbstractions.Analyzer\Tocsoft.DateTimeAbstractions.Analyzer.csproj", "{C8D8C32F-233C-4700-8050-4A033F470251}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tocsoft.DateTimeAbstractions.Analyzer.Test", "Tocsoft.DateTimeAbstractions.Analyzer\Tocsoft.DateTimeAbstractions.Analyzer.Test\Tocsoft.DateTimeAbstractions.Analyzer.Test.csproj", "{59C195B9-A250-4317-AA51-62AD074EA002}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{F59B2FEE-7E98-4DE5-8BBA-3D628FB2F615}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F59B2FEE-7E98-4DE5-8BBA-3D628FB2F615}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F59B2FEE-7E98-4DE5-8BBA-3D628FB2F615}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8D8C32F-233C-4700-8050-4A033F470251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8D8C32F-233C-4700-8050-4A033F470251}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8D8C32F-233C-4700-8050-4A033F470251}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8D8C32F-233C-4700-8050-4A033F470251}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59C195B9-A250-4317-AA51-62AD074EA002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59C195B9-A250-4317-AA51-62AD074EA002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59C195B9-A250-4317-AA51-62AD074EA002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59C195B9-A250-4317-AA51-62AD074EA002}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

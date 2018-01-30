@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tocsoft.DateTimeAbstractions
+namespace Tocsoft.DateTimeAbstractions.Providers
 {
     public class StaticDateTimeProvider : DateTimeProvider
     {

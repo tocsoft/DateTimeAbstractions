@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using Tocsoft.DateTimeAbstractions.Providers;
 
 namespace Tocsoft.DateTimeAbstractions
 {
@@ -14,6 +15,7 @@ namespace Tocsoft.DateTimeAbstractions
         {
             get
             {
+                clockStack.Value = clockStack.Value ?? ImmutableStack.Create<DateTimeProvider>();
                 if (!clockStack.Value.IsEmpty)
                 {
                     return clockStack.Value.Peek();

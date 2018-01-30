@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Tocsoft.DateTimeAbstractions
+namespace Tocsoft.DateTimeAbstractions.Providers
 {
-    public class CurrentDateTimeProvider : DateTimeProvider
+    public class UtcCurrentDateTimeProvider : DateTimeProvider
     {
         public override DateTime Now()
         {
