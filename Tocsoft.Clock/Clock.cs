@@ -6,20 +6,15 @@ namespace Tocsoft.DateTimeAbstractions
 {
     public static class Clock
     {
-        private static AsyncLocal<Stack<DateTimeProvider>> clockStack = new AsyncLocal<Stack<DateTimeProvider>>();
+        private static AsyncLocal<ImmutableStack<DateTimeProvider>> clockStack = new AsyncLocal<ImmutableStack<DateTimeProvider>>();
 
         public static DateTimeProvider DefaultProvider { get; set; } = new CurrentDateTimeProvider();
 
-        static Clock()
-        {
-            clockStack.Value = new Stack<DateTimeProvider>();
-        }
-
-        private static DateTimeProvider Current
+        public static DateTimeProvider CurrentProvider
         {
             get
             {
-                if (clockStack.Value.Count > 0)
+                if (!clockStack.Value.IsEmpty)
                 {
                     return clockStack.Value.Peek();
                 }
@@ -32,18 +27,23 @@ namespace Tocsoft.DateTimeAbstractions
 
         public static IDisposable Pin()
         {
-            return Pin(new StaticDateTimeProvider(Now));
+            return Pin(Now);
+        }
+        public static IDisposable Pin(DateTime date)
+        {
+            return Pin(new StaticDateTimeProvider(date));
         }
 
         internal static IDisposable Pin(DateTimeProvider provider)
         {
-            clockStack.Value.Push(provider);
+            var stack = clockStack.Value ?? ImmutableStack.Create<DateTimeProvider>();
+            clockStack.Value = stack.Push(provider);
             return new PopWhenDisposed();
         }
 
         private static void Pop()
         {
-            clockStack.Value.Pop();
+            clockStack.Value = clockStack.Value.Pop();
         }
 
         private sealed class PopWhenDisposed : IDisposable
@@ -62,6 +62,6 @@ namespace Tocsoft.DateTimeAbstractions
             }
         }
 
-        public static DateTime Now => Current.Now();
+        public static DateTime Now => CurrentProvider.Now();
     }
 }
