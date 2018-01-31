@@ -131,8 +131,9 @@ namespace TestApplication
     class TypeName
     {   
         DateTime prop;
-        public TypeName(){
-            DateTime.Now
+        public TypeName()
+        {
+            var r = DateTime.Now
         }
     }
 }";
@@ -156,8 +157,9 @@ namespace TestApplication
     class TypeName
     {   
         DateTime prop;
-        public TypeName(){
-            Clock.Now
+        public TypeName()
+        {
+            var r = Clock.Now
         }
     }
 }";

@@ -76,7 +76,7 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
                                                             .First();
 
             string propertyName = memberAccess.Name.ToString();
-            SyntaxTriviaList trivia = memberAccess.GetTrailingTrivia();
+            SyntaxTriviaList trivia = node.GetTrailingTrivia();
 
             MemberAccessExpressionSyntax expression = SyntaxFactory.MemberAccessExpression(
                                                      SyntaxKind.SimpleMemberAccessExpression,
