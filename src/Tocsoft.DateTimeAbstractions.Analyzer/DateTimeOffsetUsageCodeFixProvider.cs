@@ -15,7 +15,6 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Tocsoft.DateTimeAbstractions.Analyzer
 {
-
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(DateTimeUsageCodeFixProvider))]
     [Shared]
     public class DateTimeOffsetUsageCodeFixProvider : CodeFixProvider

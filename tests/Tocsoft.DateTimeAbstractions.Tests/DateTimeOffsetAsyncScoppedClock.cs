@@ -58,7 +58,7 @@ namespace Tocsoft.DateTimeAbstractions.Tests
 
         private async Task RunTest(int count)
         {
-            DateTimeOffset date = new DateTimeOffset(2000, 01, 01, 12,12,12, TimeSpan.FromHours(2));
+            DateTimeOffset date = new DateTimeOffset(2000, 01, 01, 12, 12, 12, TimeSpan.FromHours(2));
             date = date.AddDays(count);
             using (ClockOffset.Pin(date))
             {

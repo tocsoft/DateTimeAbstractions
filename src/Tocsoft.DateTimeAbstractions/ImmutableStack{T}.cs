@@ -10,7 +10,7 @@ namespace Tocsoft.DateTimeAbstractions
 {
     internal class ImmutableStack<T>
     {
-        private static readonly ImmutableStack<T> emptyField = new ImmutableStack<T>();
+        private static readonly ImmutableStack<T> EmptyField = new ImmutableStack<T>();
         private T head;
         private ImmutableStack<T> tail;
 
@@ -40,13 +40,14 @@ namespace Tocsoft.DateTimeAbstractions
         {
             get
             {
-                return emptyField;
+                return EmptyField;
             }
         }
 
         /// <summary>
         /// Gets the empty stack, upon which all stacks are built.
         /// </summary>
+        /// <returns>Returns an empty ImmutableStack</returns>
         public ImmutableStack<T> Clear()
         {
             return Empty;

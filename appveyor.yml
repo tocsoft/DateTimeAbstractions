@@ -10,7 +10,7 @@ before_build:
 
 build_script:
   - cmd: build.cmd
-#  - cmd: tests\CodeCoverage\CodeCoverage.cmd
+  - cmd: tests\CodeCoverage\CodeCoverage.cmd
 
 after_build:
   - cmd: appveyor PushArtifact "artifacts\Tocsoft.DateTimeAbstractions.%GitVersion_NuGetVersion%.nupkg"

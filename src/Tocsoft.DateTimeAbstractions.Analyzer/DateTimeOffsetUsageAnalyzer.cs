@@ -14,7 +14,6 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Tocsoft.DateTimeAbstractions.Analyzer
 {
-
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class DateTimeOffsetUsageAnalyzer : DiagnosticAnalyzer
     {

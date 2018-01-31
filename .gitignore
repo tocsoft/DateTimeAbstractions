@@ -215,3 +215,4 @@ artifacts/
 #CodeCoverage
 **/CodeCoverage/*
 docs/
+/Tocsoft.DateTimeAbstractions.Coverage.xml

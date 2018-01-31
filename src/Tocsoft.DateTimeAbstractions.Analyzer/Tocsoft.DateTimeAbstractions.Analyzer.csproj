@@ -4,11 +4,15 @@
     <TargetFramework>netstandard1.3</TargetFramework>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType Condition="$(codecov) != ''">full</DebugType>
+    <DebugType Condition="$(codecov) == ''">portable</DebugType>
+    <DebugSymbols>True</DebugSymbols>
+    <VersionPrefix Condition="$(packageversion) != ''">$(packageversion)</VersionPrefix>
+    <VersionPrefix Condition="$(packageversion) == ''">0.0.1</VersionPrefix>
   </PropertyGroup>
   
   <PropertyGroup>
     <PackageId>Tocsoft.DateTimeAbstractions.Analyzer</PackageId>
-    <PackageVersion>1.0.0.0</PackageVersion>
     <Authors>Tocsoft</Authors>
     <PackageLicenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</PackageLicenseUrl>
     <PackageProjectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</PackageProjectUrl>
