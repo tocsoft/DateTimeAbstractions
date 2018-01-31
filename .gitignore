@@ -213,6 +213,6 @@ artifacts/
 *.csproj.bak
 
 #CodeCoverage
-**/CodeCoverage/*
+**/CodeCoverage/OpenCover*
 docs/
 /Tocsoft.DateTimeAbstractions.Coverage.xml

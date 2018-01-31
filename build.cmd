@@ -10,8 +10,11 @@ ECHO Building nuget packages
 )
      if not "%errorlevel%"=="0" goto failure
 
-dotnet test ./tests/Tocsoft.DateTimeAbstractions.Tests/Tocsoft.DateTimeAbstractions.Tests.csproj --no-build
-
+if not "%CI%" == "True"  (
+    ECHO NOT on CI server running tests
+    dotnet test ./tests/Tocsoft.DateTimeAbstractions.Tests/Tocsoft.DateTimeAbstractions.Tests.csproj -c Release --no-build
+)
+if not "%errorlevel%"=="0" goto failure
 
 if not "%GitVersion_NuGetVersion%" == "" (
     dotnet pack ./src/Tocsoft.DateTimeAbstractions/ -c Release --output ../../artifacts --no-build /p:packageversion=%GitVersion_NuGetVersion%
