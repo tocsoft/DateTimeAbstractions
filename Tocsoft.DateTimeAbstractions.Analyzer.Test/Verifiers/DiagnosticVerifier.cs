@@ -188,6 +188,7 @@ namespace TestHelper
                     expected.Path, actualSpan.Path, FormatDiagnostics(analyzer, diagnostic)));
 
             var actualLinePosition = actualSpan.StartLinePosition;
+            var actualEndLinePosition = actualSpan.EndLinePosition;
 
             // Only check line position if there is an actual line in the real diagnostic
             if (actualLinePosition.Line > 0)
@@ -208,6 +209,17 @@ namespace TestHelper
                     Assert.IsTrue(false,
                         string.Format("Expected diagnostic to start at column \"{0}\" was actually at column \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
                             expected.Column, actualLinePosition.Character + 1, FormatDiagnostics(analyzer, diagnostic)));
+                }
+            }
+            // Only check column position if there is an actual column position in the real diagnostic
+            if (actualEndLinePosition.Character > 0 & expected.Length > 0)
+            {
+                var endColumn = expected.Column + expected.Length;
+                if (actualEndLinePosition.Character + 1 != endColumn)
+                {
+                    Assert.IsTrue(false,
+                        string.Format("Expected diagnostic to end at column \"{0}\" was actually at column \"{1}\"\r\n\r\nDiagnostic:\r\n    {2}\r\n",
+                            endColumn, actualEndLinePosition.Character + 1, FormatDiagnostics(analyzer, diagnostic)));
                 }
             }
         }

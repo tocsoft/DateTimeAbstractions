@@ -69,12 +69,9 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
-            var memberAccess =
-                root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf()
-                .OfType<MemberAccessExpressionSyntax>().First();
+            var memberAccess = root.FindNode(diagnostic.Location.SourceSpan) as MemberAccessExpressionSyntax;
 
-            var operation = (IPropertyReferenceOperation)model.GetOperation(memberAccess);
-            var property = operation.Property.Name;
+            var propertyName = memberAccess.Name.ToString();
 
             var expression = SyntaxFactory.MemberAccessExpression(
                                                      SyntaxKind.SimpleMemberAccessExpression,
@@ -86,7 +83,7 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
                                                              SyntaxFactory.IdentifierName("DateTimeAbstractions")),
                                                          SyntaxFactory.IdentifierName("Clock"))
                                                          .WithAdditionalAnnotations(Simplifier.Annotation),
-                                                     SyntaxFactory.IdentifierName(property));
+                                                     SyntaxFactory.IdentifierName(propertyName));
 
             root = root.ReplaceNode(memberAccess, expression);
             return root;
@@ -96,28 +93,22 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
         {
             var compilation =
                 root as CompilationUnitSyntax;
+            if (compilation == null) {
+                return root;
+            }
+
+            if (compilation.Usings.Any(x => x.Name.GetText().ToString() == "Tocsoft.DateTimeAbstractions"))
+            {
+                return root;
+            }
 
             var abstractionsUsingStatement =
-          SyntaxFactory.UsingDirective(
-              SyntaxFactory.QualifiedName(
-                  SyntaxFactory.IdentifierName("Tocsoft"),
-                  SyntaxFactory.IdentifierName("DateTimeAbstractions")));
+              SyntaxFactory.UsingDirective(
+                  SyntaxFactory.QualifiedName(
+                      SyntaxFactory.IdentifierName("Tocsoft"),
+                      SyntaxFactory.IdentifierName("DateTimeAbstractions")));
 
-            if (null == compilation)
-            {
-                root =
-                root.InsertNodesBefore(
-                    root.ChildNodes().First(),
-                    new[] { abstractionsUsingStatement });
-            }
-            else if (compilation.Usings.All(u => u.Name.GetText().ToString() != "Tocsoft.DateTimeAbstractions"))
-            {
-                root =
-                    root.InsertNodesAfter(compilation.Usings.Last(),
-                    new[] { abstractionsUsingStatement });
-            }
-
-            return root;
+            return compilation.AddUsings(abstractionsUsingStatement);
         }
     }
 }

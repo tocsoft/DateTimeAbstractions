@@ -17,6 +17,7 @@
 
   <PropertyGroup>
     <AnlyzersOutputDir>..\Tocsoft.DateTimeAbstractions.Analyzer\bin\$(Configuration)\netstandard1.3</AnlyzersOutputDir>
+    <Version>1.0.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <None Include="$(AnlyzersOutputDir)\tools\*.ps1" Pack="true" PackagePath="tools" Visible="false" />

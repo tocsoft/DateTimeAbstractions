@@ -54,6 +54,36 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer.Test
             VerifyCSharpDiagnostic(test, expected);
         }
 
+        //No diagnostics expected to show up
+        [TestMethod]
+        public void TestMethodAnalyzerExpectedForSystemDatetime()
+        {
+            var test = @"
+    namespace Tocsoft.DateTimeAbstractions
+    {
+        class TypeName
+        {   
+            public TypeName(){
+                System.DateTime time = System.DateTime.Now;
+            }
+        }
+
+        public static class Clock { public static DateTime Now { get; set; } }
+    }";
+            var expected = new DiagnosticResult
+            {
+                Id = DateTimeUsageAnalyzer.DiagnosticId,
+                Message = "Do not call DateTime.Now",
+                Severity = DiagnosticSeverity.Warning,
+                Locations =
+                  new[] {
+                            new DiagnosticResultLocation("Test0.cs", 7, 40, 19)
+                      }
+            };
+
+            VerifyCSharpDiagnostic(test, expected);
+        }
+
 
 
         //No diagnostics expected to show up
@@ -101,13 +131,54 @@ namespace TestApplication
         public void DateTimeUtcNowMappsToClockUtcNow()
         {
             var test = @"
+using Tocsoft.DateTimeAbstractions;
 using System;
+
 namespace TestApplication
 {
     class TypeName
     {   
         public TypeName(){
             DateTime time = DateTime.UtcNow;
+        }
+    }
+}";
+            AdditionalCodeFiles = new[] {
+                @"
+using System;
+
+namespace Tocsoft.DateTimeAbstractions
+{
+    public static class Clock { public static DateTime UtcNow { get; set; } }
+}"
+            };
+
+            var fixtest = @"
+using Tocsoft.DateTimeAbstractions;
+using System;
+
+namespace TestApplication
+{
+    class TypeName
+    {   
+        public TypeName(){
+            DateTime time = Clock.UtcNow;
+        }
+    }
+}";
+            VerifyCSharpFix(test, fixtest);
+        }
+        [TestMethod]
+        public void DateTimeUtcNowMappsToClockUtcNowDotHour()
+        {
+            var test = @"
+using System;
+namespace TestApplication
+{
+    class TypeName
+    {   
+        public TypeName(){
+            DateTime time = DateTime.UtcNow.Hour;
         }
     }
 }";
@@ -130,7 +201,44 @@ namespace TestApplication
     class TypeName
     {   
         public TypeName(){
-            DateTime time = Clock.UtcNow;
+            DateTime time = Clock.UtcNow.Hour;
+        }
+    }
+}";
+            VerifyCSharpFix(test, fixtest);
+        }
+
+        [TestMethod]
+        public void SystemDateTimeUtcNowMappsToClockUtcNow()
+        {
+            var test = @"
+namespace TestApplication
+{
+    class TypeName
+    {   
+        public TypeName(){
+            System.DateTime time = System.DateTime.UtcNow;
+        }
+    }
+}";
+            AdditionalCodeFiles = new[] {
+                @"
+using System;
+
+namespace Tocsoft.DateTimeAbstractions
+{
+    public static class Clock { public static DateTime UtcNow { get; set; } }
+}"
+            };
+
+            var fixtest = @"using Tocsoft.DateTimeAbstractions;
+
+namespace TestApplication
+{
+    class TypeName
+    {   
+        public TypeName(){
+            System.DateTime time = Clock.UtcNow;
         }
     }
 }";

@@ -1,0 +1,45 @@
+﻿using System;
+using System.Threading;
+using Tocsoft.DateTimeAbstractions;
+
+namespace Scratch
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine("Real time");
+            for (var i = 0; i < 10; i++)
+            {
+                logTime();
+            }
+            Console.WriteLine();
+            Console.WriteLine("Pinned");
+            using (Clock.Pin(new DateTime(2000, 01, 01)))
+            {
+                for (var i = 0; i < 10; i++)
+                {
+                    logTime();
+                }
+            }
+            Console.WriteLine();
+
+            Console.WriteLine("Real time");
+            for (var i = 0; i < 10; i++)
+            {
+                logTime();
+            }
+            Console.WriteLine();
+
+            Console.ReadLine();
+        }
+
+        private static void logTime()
+        {
+            Console.WriteLine(Clock.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+            Thread.Sleep(100);
+
+        }
+    }
+}
