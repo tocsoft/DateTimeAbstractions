@@ -122,6 +122,49 @@ namespace TestApplication
         }
 
         [Fact]
+        public void IncompleteCodeCanBeFixed()
+        {
+            string test = @"
+using System;
+namespace TestApplication
+{
+    class TypeName
+    {   
+        DateTime prop;
+        public TypeName(){
+            DateTime.Now
+        }
+    }
+}";
+            this.AdditionalCodeFiles = new[]
+            {
+                @"
+using System;
+
+namespace Tocsoft.DateTimeAbstractions
+{
+    public static class Clock { public static DateTime Now { get; set; } }
+}"
+            };
+
+            string fixtest = @"
+using System;
+using Tocsoft.DateTimeAbstractions;
+
+namespace TestApplication
+{
+    class TypeName
+    {   
+        DateTime prop;
+        public TypeName(){
+            Clock.Now
+        }
+    }
+}";
+            this.VerifyCSharpFix(test, fixtest);
+        }
+
+        [Fact]
         public void DateTimeUtcNowMappsToClockUtcNow()
         {
             string test = @"

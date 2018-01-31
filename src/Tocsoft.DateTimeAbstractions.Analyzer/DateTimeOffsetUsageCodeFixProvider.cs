@@ -34,15 +34,18 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            Diagnostic diagnostic = context.Diagnostics.First();
+            Diagnostic diagnostic = context.Diagnostics.Where(x => x.Id == DateTimeOffsetUsageAnalyzer.DiagnosticId).FirstOrDefault();
 
-            // Register a code action that will invoke the fix.
-            context.RegisterCodeFix(
+            if (diagnostic != null)
+            {
+                // Register a code action that will invoke the fix.
+                context.RegisterCodeFix(
                 CodeAction.Create(
                     title: Title,
                     createChangedDocument: c => this.ReplaceWithCallToClock(context, c),
                     equivalenceKey: Title),
                 diagnostic);
+            }
 
             return Task.CompletedTask;
         }
@@ -64,12 +67,16 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
         {
             SemanticModel model = await context.Document.GetSemanticModelAsync(context.CancellationToken);
 
-            Diagnostic diagnostic = context.Diagnostics.First();
+            Diagnostic diagnostic = context.Diagnostics.Where(x => x.Id == DateTimeUsageAnalyzer.DiagnosticId).FirstOrDefault();
             Microsoft.CodeAnalysis.Text.TextSpan diagnosticSpan = diagnostic.Location.SourceSpan;
 
-            MemberAccessExpressionSyntax memberAccess = root.FindNode(diagnostic.Location.SourceSpan) as MemberAccessExpressionSyntax;
+            SyntaxNode node = root.FindNode(diagnostic.Location.SourceSpan);
+            MemberAccessExpressionSyntax memberAccess = node.DescendantNodesAndSelf(x => !(x is MemberAccessExpressionSyntax))
+                                                            .OfType<MemberAccessExpressionSyntax>()
+                                                            .First();
 
             string propertyName = memberAccess.Name.ToString();
+            SyntaxTriviaList trivia = memberAccess.GetTrailingTrivia();
 
             MemberAccessExpressionSyntax expression = SyntaxFactory.MemberAccessExpression(
                                                      SyntaxKind.SimpleMemberAccessExpression,
@@ -81,7 +88,7 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
                                                              SyntaxFactory.IdentifierName("DateTimeAbstractions")),
                                                          SyntaxFactory.IdentifierName("ClockOffset"))
                                                          .WithAdditionalAnnotations(Simplifier.Annotation),
-                                                     SyntaxFactory.IdentifierName(propertyName));
+                                                     SyntaxFactory.IdentifierName(propertyName)).WithTrailingTrivia(trivia);
 
             root = root.ReplaceNode(memberAccess, expression);
             return root;
