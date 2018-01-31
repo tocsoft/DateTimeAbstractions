@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard1.3</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DebugType Condition="$(codecov) != ''">full</DebugType>
@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <!-- marked as not visible aand for it not to include  -->
-    <ProjectReference Include="..\Tocsoft.DateTimeAbstractions.Analyzer\Tocsoft.DateTimeAbstractions.Analyzer.csproj" Visible="false">
+    <ProjectReference Include="..\Tocsoft.DateTimeAbstractions.Analyzer\Tocsoft.DateTimeAbstractions.Analyzer.csproj" Visible="false" SkipGetTargetFrameworkProperties="true">
       <PrivateAssets>All</PrivateAssets>
       <ExcludeAssets>All</ExcludeAssets>
       <IncludeAssets>None</IncludeAssets>
