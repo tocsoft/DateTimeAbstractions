@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Tocsoft.Clock\Tocsoft.DateTimeAbstractions.csproj" />
+    <ProjectReference Include="..\Tocsoft.DateTimeAbstractions\Tocsoft.DateTimeAbstractions.csproj" />
   </ItemGroup>
 
 </Project>
