@@ -62,7 +62,7 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DateTime.Now should not be called..
+        ///   Looks up a localized string similar to DateTime static properties are not testable.
         /// </summary>
         internal static string AnalyzerDescription {
             get {
@@ -71,7 +71,7 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do not call {0}.{1}.
+        ///   Looks up a localized string similar to Do not call {0}.{1} as they are not testable, use an abstraction instead..
         /// </summary>
         internal static string AnalyzerMessageFormat {
             get {
@@ -80,7 +80,7 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DateTime.Now should not be called..
+        ///   Looks up a localized string similar to DateTime static properties are not testable.
         /// </summary>
         internal static string AnalyzerTitle {
             get {

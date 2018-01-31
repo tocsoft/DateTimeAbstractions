@@ -1,3 +1,6 @@
+// Copyright (c) Tocsoft and contributors.
+// Licensed under the Apache License, Version 2.0.
+
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -23,18 +26,19 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
                 Resources.ResourceManager,
                 typeof(Resources));
 
-        private static readonly LocalizableString MessageFormat = new LocalizableResourceString(nameof(Resources.AnalyzerMessageFormat),
+        private static readonly LocalizableString MessageFormat = new LocalizableResourceString(
+            nameof(Resources.AnalyzerMessageFormat),
             Resources.ResourceManager,
             typeof(Resources));
 
-        private static readonly LocalizableString Description = new LocalizableResourceString(nameof(Resources.AnalyzerDescription),
+        private static readonly LocalizableString Description = new LocalizableResourceString(
+            nameof(Resources.AnalyzerDescription),
             Resources.ResourceManager,
             typeof(Resources));
 
         private const string Category = "Testability";
 
-
-        private static DiagnosticDescriptor Rule = new DiagnosticDescriptor(
+        private static DiagnosticDescriptor rule = new DiagnosticDescriptor(
             DiagnosticId,
             Title,
             MessageFormat,
@@ -43,7 +47,10 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
             isEnabledByDefault: true,
             description: Description);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
+        {
+            get { return ImmutableArray.Create(rule); }
+        }
 
         private static readonly ImmutableArray<string> DateTimePropertyNames = new[]
             {
@@ -59,32 +66,32 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
 
             context.RegisterCompilationStartAction(compilationStartContext =>
             {
-                var compilation = compilationStartContext.Compilation;
-                var dateTimeType = compilation.GetTypeByMetadataName("System.DateTime");
+                Compilation compilation = compilationStartContext.Compilation;
+                INamedTypeSymbol dateTimeType = compilation.GetTypeByMetadataName("System.DateTime");
 
-                compilationStartContext.RegisterOperationAction(operationContext =>
-                {
-                    IPropertyReferenceOperation invocation = (IPropertyReferenceOperation)operationContext.Operation;
-
-                    if (invocation.Member == null || invocation.Member.ContainingType != dateTimeType)
+                compilationStartContext.RegisterOperationAction(
+                    operationContext =>
                     {
-                        return;
-                    }
+                        IPropertyReferenceOperation invocation = (IPropertyReferenceOperation)operationContext.Operation;
 
-                    IPropertySymbol targetProperty = invocation.Property;
+                        if (invocation.Member == null || invocation.Member.ContainingType != dateTimeType)
+                        {
+                            return;
+                        }
 
-                    if (targetProperty == null || !DateTimePropertyNames.Contains(targetProperty.MetadataName))
-                    {
-                        return;
-                    }
+                        IPropertySymbol targetProperty = invocation.Property;
 
-                    operationContext.ReportDiagnostic(Diagnostic.Create(
-                              Rule,
-                              invocation.Syntax.GetLocation(),
-                              invocation.Member.ContainingType.Name,
-                              targetProperty.Name));
+                        if (targetProperty == null || !DateTimePropertyNames.Contains(targetProperty.MetadataName))
+                        {
+                            return;
+                        }
 
-                }, OperationKind.PropertyReference);
+                        operationContext.ReportDiagnostic(Diagnostic.Create(
+                                  rule,
+                                  invocation.Syntax.GetLocation(),
+                                  invocation.Member.ContainingType.Name,
+                                  targetProperty.Name));
+                    }, OperationKind.PropertyReference);
             });
         }
     }

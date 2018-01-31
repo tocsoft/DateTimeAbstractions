@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AnalyzerDescription" xml:space="preserve">
-    <value>DateTime.Now should not be called.</value>
+    <value>DateTime static properties are not testable</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="AnalyzerMessageFormat" xml:space="preserve">
-    <value>Do not call {0}.{1}</value>
+    <value>Do not call {0}.{1} as they are not testable, use an abstraction instead.</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="AnalyzerTitle" xml:space="preserve">
-    <value>DateTime.Now should not be called.</value>
+    <value>DateTime static properties are not testable</value>
     <comment>The title of the diagnostic.</comment>
   </data>
 </root>

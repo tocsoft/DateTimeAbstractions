@@ -1,26 +1,26 @@
-using System;
-using System.Collections.Generic;
+﻿// Copyright (c) Tocsoft and contributors.
+// Licensed under the Apache License, Version 2.0.
+
 using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Rename;
-using Microsoft.CodeAnalysis.Text;
-using Microsoft.CodeAnalysis.Operations;
 using Microsoft.CodeAnalysis.Simplification;
 
 namespace Tocsoft.DateTimeAbstractions.Analyzer
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(DateTimeUsageCodeFixProvider)), Shared]
-    public class DateTimeUsageCodeFixProvider : CodeFixProvider
+
+    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(DateTimeUsageCodeFixProvider))]
+    [Shared]
+    public class DateTimeOffsetUsageCodeFixProvider : CodeFixProvider
     {
-        private const string title = "Replace DateTime with Clock";
+        private const string Title = "Replace DateTimeOffset with ClockOffset";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
@@ -35,14 +35,14 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var diagnostic = context.Diagnostics.First();
+            Diagnostic diagnostic = context.Diagnostics.First();
 
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
                 CodeAction.Create(
-                    title: title,
-                    createChangedDocument: c => ReplaceWithCallToClock(context, c),
-                    equivalenceKey: title),
+                    title: Title,
+                    createChangedDocument: c => this.ReplaceWithCallToClock(context, c),
+                    equivalenceKey: Title),
                 diagnostic);
 
             return Task.CompletedTask;
@@ -50,12 +50,11 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
 
         private async Task<Document> ReplaceWithCallToClock(CodeFixContext context, CancellationToken cancellationToken)
         {
-            var document = context.Document;
-            
-            var root = await context.Document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            Document document = context.Document;
+
+            SyntaxNode root = await context.Document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
             // this is us accessing the property on datetime i.e. the call to 'DateTime.Now'
-
             root = await ReplaceMemberCall(context, root).ConfigureAwait(false);
             root = ApplyUsings(root);
 
@@ -64,16 +63,16 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
 
         private static async Task<SyntaxNode> ReplaceMemberCall(CodeFixContext context, SyntaxNode root)
         {
-            var model = await context.Document.GetSemanticModelAsync(context.CancellationToken);
+            SemanticModel model = await context.Document.GetSemanticModelAsync(context.CancellationToken);
 
-            var diagnostic = context.Diagnostics.First();
-            var diagnosticSpan = diagnostic.Location.SourceSpan;
+            Diagnostic diagnostic = context.Diagnostics.First();
+            Microsoft.CodeAnalysis.Text.TextSpan diagnosticSpan = diagnostic.Location.SourceSpan;
 
-            var memberAccess = root.FindNode(diagnostic.Location.SourceSpan) as MemberAccessExpressionSyntax;
+            MemberAccessExpressionSyntax memberAccess = root.FindNode(diagnostic.Location.SourceSpan) as MemberAccessExpressionSyntax;
 
-            var propertyName = memberAccess.Name.ToString();
+            string propertyName = memberAccess.Name.ToString();
 
-            var expression = SyntaxFactory.MemberAccessExpression(
+            MemberAccessExpressionSyntax expression = SyntaxFactory.MemberAccessExpression(
                                                      SyntaxKind.SimpleMemberAccessExpression,
                                                      SyntaxFactory.MemberAccessExpression(
                                                          SyntaxKind.SimpleMemberAccessExpression,
@@ -81,7 +80,7 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
                                                              SyntaxKind.SimpleMemberAccessExpression,
                                                              SyntaxFactory.IdentifierName("Tocsoft"),
                                                              SyntaxFactory.IdentifierName("DateTimeAbstractions")),
-                                                         SyntaxFactory.IdentifierName("Clock"))
+                                                         SyntaxFactory.IdentifierName("ClockOffset"))
                                                          .WithAdditionalAnnotations(Simplifier.Annotation),
                                                      SyntaxFactory.IdentifierName(propertyName));
 
@@ -91,9 +90,10 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
 
         private static SyntaxNode ApplyUsings(SyntaxNode root)
         {
-            var compilation =
+            CompilationUnitSyntax compilation =
                 root as CompilationUnitSyntax;
-            if (compilation == null) {
+            if (compilation == null)
+            {
                 return root;
             }
 
@@ -102,7 +102,7 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
                 return root;
             }
 
-            var abstractionsUsingStatement =
+            UsingDirectiveSyntax abstractionsUsingStatement =
               SyntaxFactory.UsingDirective(
                   SyntaxFactory.QualifiedName(
                       SyntaxFactory.IdentifierName("Tocsoft"),
@@ -112,4 +112,3 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
         }
     }
 }
-

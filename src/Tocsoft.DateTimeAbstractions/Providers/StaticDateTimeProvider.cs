@@ -1,8 +1,11 @@
-﻿using System;
+﻿// Copyright (c) Tocsoft and contributors.
+// Licensed under the Apache License, Version 2.0.
+
+using System;
 
 namespace Tocsoft.DateTimeAbstractions.Providers
 {
-    public class StaticDateTimeProvider : DateTimeProvider
+    internal class StaticDateTimeProvider : DateTimeProvider
     {
         private readonly DateTime utcdate;
 
@@ -24,11 +27,12 @@ namespace Tocsoft.DateTimeAbstractions.Providers
 
         public override DateTime Now()
         {
-            return date;
+            return this.date;
         }
+
         public override DateTime UtcNow()
         {
-            return utcdate;
+            return this.utcdate;
         }
     }
 }

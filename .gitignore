@@ -201,8 +201,6 @@ FakesAssemblies/
 
 **/node_modules
 **/node_modules/*
-**/Images/ActualOutput
-**/Images/ReferenceOutput
 
 # ASP.NET 5
 project.lock.json
@@ -217,5 +215,3 @@ artifacts/
 #CodeCoverage
 **/CodeCoverage/*
 docs/
-/samples/AvatarWithRoundedCorner/output
-/ImageSharp.Coverage.xml

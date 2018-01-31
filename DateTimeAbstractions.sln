@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tocsoft.DateTimeAbstractions", "src\Tocsoft.DateTimeAbstractions\Tocsoft.DateTimeAbstractions.csproj", "{7DF6C6E4-AB66-4B60-A284-8FC455FF3F60}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tocsoft.DateTimeAbstractions.Analyzer", "src\Tocsoft.DateTimeAbstractions.Analyzer\Tocsoft.DateTimeAbstractions.Analyzer.csproj", "{7D850428-87E3-43DF-BC2D-896F19AB4B8D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tocsoft.DateTimeAbstractions.Tests", "tests\Tocsoft.DateTimeAbstractions.Tests\Tocsoft.DateTimeAbstractions.Tests.csproj", "{D156AAB6-3842-46D6-9BB6-840500B886E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F8467131-B4B7-45C5-BCD4-502AFDFF78D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FBDA40FC-0528-4125-B001-69342BE33A0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D76D83F4-ABC2-4F7D-9A5A-754285FC7C0A}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		build.cmd = build.cmd
+		gitversion.yml = gitversion.yml
+		LICENSE = LICENSE
+		README.md = README.md
+		Rules.ruleset = Rules.ruleset
+		stylecop.json = stylecop.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DF6C6E4-AB66-4B60-A284-8FC455FF3F60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DF6C6E4-AB66-4B60-A284-8FC455FF3F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DF6C6E4-AB66-4B60-A284-8FC455FF3F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DF6C6E4-AB66-4B60-A284-8FC455FF3F60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D850428-87E3-43DF-BC2D-896F19AB4B8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D850428-87E3-43DF-BC2D-896F19AB4B8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D850428-87E3-43DF-BC2D-896F19AB4B8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D850428-87E3-43DF-BC2D-896F19AB4B8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D156AAB6-3842-46D6-9BB6-840500B886E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D156AAB6-3842-46D6-9BB6-840500B886E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D156AAB6-3842-46D6-9BB6-840500B886E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D156AAB6-3842-46D6-9BB6-840500B886E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7DF6C6E4-AB66-4B60-A284-8FC455FF3F60} = {F8467131-B4B7-45C5-BCD4-502AFDFF78D3}
+		{7D850428-87E3-43DF-BC2D-896F19AB4B8D} = {F8467131-B4B7-45C5-BCD4-502AFDFF78D3}
+		{D156AAB6-3842-46D6-9BB6-840500B886E1} = {FBDA40FC-0528-4125-B001-69342BE33A0A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4FD45AB1-EAB7-4AC9-85D4-1E6463CC8D29}
+	EndGlobalSection
+EndGlobal

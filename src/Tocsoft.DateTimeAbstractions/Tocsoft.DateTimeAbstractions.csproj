@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- marked as not visible aand for it not to include  -->
+    <ProjectReference Include="..\Tocsoft.DateTimeAbstractions.Analyzer\Tocsoft.DateTimeAbstractions.Analyzer.csproj" Visible="false">
+      <PrivateAssets>All</PrivateAssets>
+      <ExcludeAssets>All</ExcludeAssets>
+      <IncludeAssets>None</IncludeAssets>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <AnlyzersOutputDir>..\Tocsoft.DateTimeAbstractions.Analyzer\bin\$(Configuration)\netstandard1.3</AnlyzersOutputDir>
+    <Version>1.0.0</Version>
+    <Authors>Tocsoft</Authors>
+    <Company />
+    <Product>DateTimeAbstractions</Product>
+    <Description>DateTimeAbstractions is an testable alternative to the static methods on DateTime and DateTimeOffset. 
+Includes an analyzer/codefix finding usages of DateTime to replaces it with out testable alternative.</Description>
+    <PackageTags>DateTimeOffset DateTime Testing UnitTest</PackageTags>
+    <PackageProjectUrl>https://github.com/tocsoft/DateTimeAbstractions</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/tocsoft/DateTimeAbstractions</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/tocsoft/DateTimeAbstractions/blob/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="$(AnlyzersOutputDir)\tools\*.ps1" Pack="true" PackagePath="tools" Visible="false" />
+    <None Include="$(AnlyzersOutputDir)\Tocsoft.DateTimeAbstractions.Analyzer.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+  </ItemGroup>
+  
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\Tocsoft.DateTimeAbstractions.xml</DocumentationFile>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\Tocsoft.DateTimeAbstractions.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" Visible="false" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

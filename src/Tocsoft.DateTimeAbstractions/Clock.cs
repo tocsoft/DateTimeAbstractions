@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// Copyright (c) Tocsoft and contributors.
+// Licensed under the Apache License, Version 2.0.
+
+using System;
 using System.Threading;
 using Tocsoft.DateTimeAbstractions.Providers;
 
 namespace Tocsoft.DateTimeAbstractions
 {
+    /// <summary>
+    /// Provides pinnable and testable scoped access to DateTime static properties.
+    /// </summary>
     public static class Clock
     {
         private static AsyncLocal<ImmutableStack<DateTimeProvider>> clockStack = new AsyncLocal<ImmutableStack<DateTimeProvider>>();
 
-        public static DateTimeProvider DefaultProvider { get; set; } = new CurrentDateTimeProvider();
+        private static DateTimeProvider DefaultProvider { get; set; } = new CurrentDateTimeProvider();
 
-        public static DateTimeProvider CurrentProvider
+        internal static DateTimeProvider CurrentProvider
         {
             get
             {
@@ -27,10 +32,20 @@ namespace Tocsoft.DateTimeAbstractions
             }
         }
 
+        /// <summary>
+        /// Pins the current date/time retuned to the current time until the disposable is disposed.
+        /// </summary>
+        /// <returns>The disposer that manages the lifetime of the scoped pinned value.</returns>
         public static IDisposable Pin()
         {
             return Pin(Now);
         }
+
+        /// <summary>
+        /// Pins the specified date/time retuned to the current time until the disposable is disposed.
+        /// </summary>
+        /// <param name="date">The date and time to the clocks time to.</param>
+        /// <returns>The disposer that manages the lifetime of the scoped pinned value.</returns>
         public static IDisposable Pin(DateTime date)
         {
             return Pin(new StaticDateTimeProvider(date));
@@ -38,7 +53,7 @@ namespace Tocsoft.DateTimeAbstractions
 
         internal static IDisposable Pin(DateTimeProvider provider)
         {
-            var stack = clockStack.Value ?? ImmutableStack.Create<DateTimeProvider>();
+            ImmutableStack<DateTimeProvider> stack = clockStack.Value ?? ImmutableStack.Create<DateTimeProvider>();
             clockStack.Value = stack.Push(provider);
             return new PopWhenDisposed();
         }
@@ -54,18 +69,29 @@ namespace Tocsoft.DateTimeAbstractions
 
             public void Dispose()
             {
-                if (disposed)
+                if (this.disposed)
                 {
                     return;
                 }
 
                 Pop();
-                disposed = true;
+                this.disposed = true;
             }
         }
 
+        /// <summary>
+        /// Gets the current local DateTime unless pinned then it will returned the pinned time as a local time.
+        /// </summary>
         public static DateTime Now => CurrentProvider.Now();
+
+        /// <summary>
+        /// Gets the current the Date portion of the current local DateTime unless pinned then it will returned the date portion of the pinned time.
+        /// </summary>
         public static DateTime Today => CurrentProvider.Now().Date;
+
+        /// <summary>
+        /// Gets the current UTC DateTime unless pinned then it will returned the pinned time as a UTC time.
+        /// </summary>
         public static DateTime UtcNow => CurrentProvider.UtcNow();
     }
 }
