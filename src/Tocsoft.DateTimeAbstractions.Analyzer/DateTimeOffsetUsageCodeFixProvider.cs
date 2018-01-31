@@ -67,7 +67,7 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
         {
             SemanticModel model = await context.Document.GetSemanticModelAsync(context.CancellationToken);
 
-            Diagnostic diagnostic = context.Diagnostics.Where(x => x.Id == DateTimeUsageAnalyzer.DiagnosticId).FirstOrDefault();
+            Diagnostic diagnostic = context.Diagnostics.Where(x => x.Id == DateTimeOffsetUsageAnalyzer.DiagnosticId).FirstOrDefault();
             Microsoft.CodeAnalysis.Text.TextSpan diagnosticSpan = diagnostic.Location.SourceSpan;
 
             SyntaxNode node = root.FindNode(diagnostic.Location.SourceSpan);
