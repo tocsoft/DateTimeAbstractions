@@ -19,11 +19,11 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
     [Shared]
     public class DateTimeOffsetUsageCodeFixProvider : CodeFixProvider
     {
-        private const string Title = "Replace DateTimeOffset with ClockOffset";
+        private const string Title = "Replace with ClockOffset";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
-            get { return ImmutableArray.Create(DateTimeUsageAnalyzer.DiagnosticId); }
+            get { return ImmutableArray.Create(DateTimeOffsetUsageAnalyzer.DiagnosticId); }
         }
 
         public sealed override FixAllProvider GetFixAllProvider()

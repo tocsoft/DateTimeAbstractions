@@ -19,7 +19,7 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
     [Shared]
     public class DateTimeUsageCodeFixProvider : CodeFixProvider
     {
-        private const string Title = "Replace DateTime with Clock";
+        private const string Title = "Replace with Clock";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
