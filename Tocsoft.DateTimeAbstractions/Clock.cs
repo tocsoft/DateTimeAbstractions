@@ -65,5 +65,6 @@ namespace Tocsoft.DateTimeAbstractions
         }
 
         public static DateTime Now => CurrentProvider.Now();
+        public static DateTime UtcNow => CurrentProvider.UtcNow();
     }
 }

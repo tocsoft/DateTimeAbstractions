@@ -8,6 +8,38 @@ namespace Tocsoft.DateTimeAbstractions.Tests
 {
     public class AsyncScoppedClock
     {
+        [Fact]
+        public void LocalTimeConfiguredStaticProviderNowAlwausReturnsLocalTime()
+        {
+            var p = new StaticDateTimeProvider(new DateTime(2000, 01, 01, 1, 2, 3, DateTimeKind.Local));
+            var localTime = p.Now();
+            Assert.Equal(DateTimeKind.Local, localTime.Kind);
+        }
+
+        [Fact]
+        public void UtcTimeConfiguredStaticProviderNowAlwausReturnsLocalTime()
+        {
+            var p = new StaticDateTimeProvider(new DateTime(2000, 01, 01, 1, 2, 3, DateTimeKind.Utc));
+            var localTime = p.Now();
+            Assert.Equal(DateTimeKind.Local, localTime.Kind);
+        }
+
+        [Fact]
+        public void LocalTimeConfiguredStaticProviderUtcNowAlwausReturnsUtcTime()
+        {
+            var p = new StaticDateTimeProvider(new DateTime(2000, 01, 01, 1, 2, 3, DateTimeKind.Local));
+            var localTime = p.UtcNow();
+            Assert.Equal(DateTimeKind.Utc, localTime.Kind);
+        }
+
+        [Fact]
+        public void UtcTimeConfiguredStaticProviderUtcNowAlwausReturnsUtcTime()
+        {
+            var p = new StaticDateTimeProvider(new DateTime(2000, 01, 01, 1, 2, 3, DateTimeKind.Utc));
+            var localTime = p.UtcNow();
+            Assert.Equal(DateTimeKind.Utc, localTime.Kind);
+        }
+
         [Theory]
         [InlineData(1)]
         [InlineData(100)]
@@ -64,8 +96,6 @@ namespace Tocsoft.DateTimeAbstractions.Tests
             // we move away from the pinned after the using statement
             Assert.NotEqual(date, Clock.Now);
 
-            Clock.DefaultProvider = new UtcCurrentDateTimeProvider();
-
             using (Clock.Pin(new StaticDateTimeProvider(date)))
             {
                 var task1 = DelayedNow(true);
@@ -102,7 +132,7 @@ namespace Tocsoft.DateTimeAbstractions.Tests
         
         public async Task<DateTime> DelayedNow(bool continueOnCapturedContext)
         {
-            await Task.Delay(1).ConfigureAwait(continueOnCapturedContext); // to force a propert delay
+            await Task.Delay(1).ConfigureAwait(continueOnCapturedContext); // to force a proper delay
             return Clock.Now;
         }
 
@@ -110,7 +140,7 @@ namespace Tocsoft.DateTimeAbstractions.Tests
         {
             using (Clock.Pin(new StaticDateTimeProvider(pinnedDate)))
             {
-                await Task.Delay(1); // to force a propert delay
+                await Task.Delay(1); // to force a proper delay
                 return Clock.Now;
             }
         }

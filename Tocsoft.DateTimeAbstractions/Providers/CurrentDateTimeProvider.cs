@@ -6,6 +6,11 @@ namespace Tocsoft.DateTimeAbstractions.Providers
     {
         public override DateTime Now()
         {
+            return DateTime.Now;
+        }
+
+        public override DateTime UtcNow()
+        {
             return DateTime.UtcNow;
         }
     }

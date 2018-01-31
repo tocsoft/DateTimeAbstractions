@@ -33,10 +33,8 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
             return WellKnownFixAllProviders.BatchFixer;
         }
 
-        public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
+        public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-           
-            // TODO: Replace the following code with your own analysis, generating a CodeAction for each fix to suggest
             var diagnostic = context.Diagnostics.First();
 
             // Register a code action that will invoke the fix.
@@ -46,6 +44,8 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
                     createChangedDocument: c => ReplaceWithCallToClock(context, c),
                     equivalenceKey: title),
                 diagnostic);
+
+            return Task.CompletedTask;
         }
 
         private async Task<Document> ReplaceWithCallToClock(CodeFixContext context, CancellationToken cancellationToken)
@@ -54,7 +54,7 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
             
             var root = await context.Document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
-            // this is us accessing the proeprty on datetime i.e. the call to 'DateTime.Now'
+            // this is us accessing the property on datetime i.e. the call to 'DateTime.Now'
 
             root = await ReplaceMemberCall(context, root).ConfigureAwait(false);
             root = ApplyUsings(root);

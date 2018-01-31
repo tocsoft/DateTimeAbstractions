@@ -97,6 +97,46 @@ namespace TestApplication
             VerifyCSharpFix(test, fixtest);
         }
 
+        [TestMethod]
+        public void DateTimeUtcNowMappsToClockUtcNow()
+        {
+            var test = @"
+using System;
+namespace TestApplication
+{
+    class TypeName
+    {   
+        public TypeName(){
+            DateTime time = DateTime.UtcNow;
+        }
+    }
+}";
+            AdditionalCodeFiles = new[] {
+                @"
+using System;
+
+namespace Tocsoft.DateTimeAbstractions
+{
+    public static class Clock { public static DateTime UtcNow { get; set; } }
+}"
+            };
+
+            var fixtest = @"
+using System;
+using Tocsoft.DateTimeAbstractions;
+
+namespace TestApplication
+{
+    class TypeName
+    {   
+        public TypeName(){
+            DateTime time = Clock.UtcNow;
+        }
+    }
+}";
+            VerifyCSharpFix(test, fixtest);
+        }
+
         protected override CodeFixProvider GetCSharpCodeFixProvider()
         {
             return new DateTimeUsageCodeFixProvider();
