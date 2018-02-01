@@ -3,6 +3,7 @@
 **Tocsoft.DateTimeAbstractions** is a testable alternative to the static `DateTime.Now` and `DateTimeOffset.Now` methods.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/3befgsic0fhiuy5e/branch/master?svg=true)](https://ci.appveyor.com/project/Tocsoft/DateTimeAbstractions/branch/master)
+[![codecov](https://codecov.io/gh/Tocsoft/DateTimeAbstractions/branch/master/graph/badge.svg)](https://codecov.io/gh/Tocsoft/DateTimeAbstractions)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/Tocsoft/DateTimeAbstractions/master/LICENSE)
 
 [![GitHub issues](https://img.shields.io/github/issues/Tocsoft/DateTimeAbstractions.svg)](https://github.com/Tocsoft/DateTimeAbstractions/issues)
