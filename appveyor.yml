@@ -3,11 +3,12 @@ image: Visual Studio 2019
 init:
   - git config --global core.autocrlf true  # otherwise we have newline errors
 
-#install:
-# - choco install gitversion.portable -y
+install:
+  - choco install gitversion.portable -pre -y
 
 before_build:
   - cmd: dotnet --version
+  - cmd: dotnet restore
   - ps: gitversion /l console /output buildserver
 
 build_script:
