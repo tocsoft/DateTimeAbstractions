@@ -23,6 +23,7 @@ branches:
     regex: '.*'
     mode: ContinuousDeployment
     tag: ci
+    source-branches: ['master']
     increment: Patch
     prevent-increment-of-merged-branch-version: false
     track-merge-target: true
