@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DebugType Condition="$(codecov) != ''">full</DebugType>
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <AnlyzersOutputDir>..\Tocsoft.DateTimeAbstractions.Analyzer\bin\$(Configuration)\netstandard1.3</AnlyzersOutputDir>
+    <AnlyzersOutputDir>..\Tocsoft.DateTimeAbstractions.Analyzer\bin\$(Configuration)\netstandard2.0</AnlyzersOutputDir>
     <Authors>Tocsoft</Authors>
     <Company />
     <Product>DateTimeAbstractions</Product>
