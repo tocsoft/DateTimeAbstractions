@@ -12,10 +12,37 @@ namespace Tocsoft.DateTimeAbstractions.Tests
     public class DateTimeOffsetAsyncScoppedClock
     {
         [Fact]
-        public void LocalTimeConfiguredStaticProviderNowAlwausReturnsLocalTime()
+        public void PinStaticDateCausesStaticDateTimeProviderToBeUsed()
         {
-            StaticDateTimeOffsetProvider p = new StaticDateTimeOffsetProvider(new DateTimeOffset(2000, 01, 01, 1, 2, 3, TimeSpan.FromHours(3)));
-            DateTimeOffset localTime = p.Now();
+            var targetDate = new DateTimeOffset(new DateTime(2000, 01, 01, 1, 2, 3, DateTimeKind.Local));
+            using (ClockOffset.Pin(targetDate))
+            {
+                var staticProvider = Assert.IsType<StaticDateTimeOffsetProvider>(ClockOffset.CurrentProvider);
+                Assert.Equal(targetDate.ToUniversalTime(), staticProvider.UtcNow());
+            }
+        }
+
+        [Fact]
+        public void UnpinnedDateCausesCurrentDateTimeProviderToBeUsed()
+        {
+            var staticProvider = Assert.IsType<CurrentDateTimeOffsetProvider>(ClockOffset.CurrentProvider);
+        }
+
+        [Fact]
+        public void PinnedDelegateCausesDelegateDateTimeProviderToBeUsed()
+        {
+            var targetDate = new DateTimeOffset(new DateTime(2000, 01, 01, 1, 2, 5, DateTimeKind.Local));
+
+            Func<DateTimeOffset> targetDateFunc = () =>
+            {
+                return targetDate;
+            };
+
+            using (ClockOffset.Pin(targetDateFunc))
+            {
+                var provider = Assert.IsType<DelegateDateTimeOffsetProvider>(ClockOffset.CurrentProvider);
+                Assert.Equal(targetDate.ToUniversalTime(), provider.UtcNow());
+            }
         }
 
         [Theory]

@@ -44,11 +44,21 @@ namespace Tocsoft.DateTimeAbstractions
         /// <summary>
         /// Pins the specified date/time retuned to the current time until the disposable is disposed.
         /// </summary>
-        /// <param name="date">The date and time to the clocks time to.</param>
+        /// <param name="date">The date and time to the clock.</param>
         /// <returns>The disposer that manages the lifetime of the scoped pinned value.</returns>
         public static IDisposable Pin(DateTime date)
         {
             return Pin(new StaticDateTimeProvider(date));
+        }
+
+        /// <summary>
+        /// Pins the clock to call the function every time it needs access to the current time until the disposable is disposed.
+        /// </summary>
+        /// <param name="dateFunc">The function that returnes date and time to the clocks.</param>
+        /// <returns>The disposer that manages the lifetime of the scoped pinned value.</returns>
+        public static IDisposable Pin(Func<DateTime> dateFunc)
+        {
+            return Pin(new DelegateDateTimeProvider(dateFunc));
         }
 
         internal static IDisposable Pin(DateTimeProvider provider)
@@ -82,12 +92,12 @@ namespace Tocsoft.DateTimeAbstractions
         /// <summary>
         /// Gets the current local DateTime unless pinned then it will returned the pinned time as a local time.
         /// </summary>
-        public static DateTime Now => CurrentProvider.Now();
+        public static DateTime Now => CurrentProvider.UtcNow().ToLocalTime();
 
         /// <summary>
         /// Gets the current the Date portion of the current local DateTime unless pinned then it will returned the date portion of the pinned time.
         /// </summary>
-        public static DateTime Today => CurrentProvider.Now().Date;
+        public static DateTime Today => Now.Date;
 
         /// <summary>
         /// Gets the current UTC DateTime unless pinned then it will returned the pinned time as a UTC time.

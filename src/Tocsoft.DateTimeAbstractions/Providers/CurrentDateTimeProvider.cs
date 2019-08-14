@@ -7,11 +7,6 @@ namespace Tocsoft.DateTimeAbstractions.Providers
 {
     internal class CurrentDateTimeProvider : DateTimeProvider
     {
-        public override DateTime Now()
-        {
-            return DateTime.Now;
-        }
-
         public override DateTime UtcNow()
         {
             return DateTime.UtcNow;

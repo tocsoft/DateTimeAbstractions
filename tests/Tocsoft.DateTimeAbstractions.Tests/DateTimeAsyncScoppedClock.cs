@@ -12,19 +12,37 @@ namespace Tocsoft.DateTimeAbstractions.Tests
     public class DateTimeAsyncScoppedClock
     {
         [Fact]
-        public void LocalTimeConfiguredStaticProviderNowAlwausReturnsLocalTime()
+        public void PinStaticDateCausesStaticDateTimeProviderToBeUsed()
         {
-            StaticDateTimeProvider p = new StaticDateTimeProvider(new DateTime(2000, 01, 01, 1, 2, 3, DateTimeKind.Local));
-            DateTime localTime = p.Now();
-            Assert.Equal(DateTimeKind.Local, localTime.Kind);
+            var targetDate = new DateTime(2000, 01, 01, 1, 2, 3, DateTimeKind.Local);
+            using (Clock.Pin(targetDate))
+            {
+                var staticProvider = Assert.IsType<StaticDateTimeProvider>(Clock.CurrentProvider);
+                Assert.Equal(targetDate.ToUniversalTime(), staticProvider.UtcNow());
+            }
         }
 
         [Fact]
-        public void UtcTimeConfiguredStaticProviderNowAlwausReturnsLocalTime()
+        public void UnpinnedDateCausesCurrentDateTimeProviderToBeUsed()
         {
-            StaticDateTimeProvider p = new StaticDateTimeProvider(new DateTime(2000, 01, 01, 1, 2, 3, DateTimeKind.Utc));
-            DateTime localTime = p.Now();
-            Assert.Equal(DateTimeKind.Local, localTime.Kind);
+            var staticProvider = Assert.IsType<CurrentDateTimeProvider>(Clock.CurrentProvider);
+        }
+
+        [Fact]
+        public void PinnedDelegateCausesDelegateDateTimeProviderToBeUsed()
+        {
+            var targetDate = new DateTime(2000, 01, 01, 1, 2, 5, DateTimeKind.Local);
+
+            Func<DateTime> targetDateFunc = () =>
+            {
+                return targetDate;
+            };
+
+            using (Clock.Pin(targetDateFunc))
+            {
+                var provider = Assert.IsType<DelegateDateTimeProvider>(Clock.CurrentProvider);
+                Assert.Equal(targetDate.ToUniversalTime(), provider.UtcNow());
+            }
         }
 
         [Fact]

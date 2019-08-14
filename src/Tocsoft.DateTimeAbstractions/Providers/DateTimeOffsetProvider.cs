@@ -7,8 +7,6 @@ namespace Tocsoft.DateTimeAbstractions.Providers
 {
     internal abstract class DateTimeOffsetProvider
     {
-        public abstract DateTimeOffset Now();
-
         public abstract DateTimeOffset UtcNow();
     }
 }

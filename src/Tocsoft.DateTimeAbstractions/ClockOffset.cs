@@ -51,6 +51,16 @@ namespace Tocsoft.DateTimeAbstractions
             return Pin(new StaticDateTimeOffsetProvider(date));
         }
 
+        /// <summary>
+        /// Pins the clock to call the function every time it needs access to the current time until the disposable is disposed.
+        /// </summary>
+        /// <param name="dateFunc">The function that returnes date and time to the clocks.</param>
+        /// <returns>The disposer that manages the lifetime of the scoped pinned value.</returns>
+        public static IDisposable Pin(Func<DateTimeOffset> dateFunc)
+        {
+            return Pin(new DelegateDateTimeOffsetProvider(dateFunc));
+        }
+
         internal static IDisposable Pin(DateTimeOffsetProvider provider)
         {
             ImmutableStack<DateTimeOffsetProvider> stack = clockStack.Value ?? ImmutableStack.Create<DateTimeOffsetProvider>();
@@ -82,7 +92,7 @@ namespace Tocsoft.DateTimeAbstractions
         /// <summary>
         /// Gets the current local DateTimeOffset unless pinned then it will returned the pinned time as a local time.
         /// </summary>
-        public static DateTimeOffset Now => CurrentProvider.Now();
+        public static DateTimeOffset Now => CurrentProvider.UtcNow().ToLocalTime();
 
         /// <summary>
         /// Gets the current UTC DateTimeOffset unless pinned then it will returned the pinned time as a UTC time.
