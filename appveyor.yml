@@ -27,13 +27,6 @@ deploy:
     artifact: /.*\.nupkg/
     on:
       branch: master
-  - provider: NuGet
-    server: https://nuget.pkg.github.com/tocsoft/index.json
-    api_key:
-      secure: krVbvUC3ZHj9xp5HTHpE2JQA9llH7VKsdmbYrdXRG0nAKvlhnrpZLho8HVt4fPuw
-    artifact: /.*\.nupkg/
-    on:
-      branch: master
 
 # prevent the double build when a branch has an active PR
 skip_branch_with_pr: true
