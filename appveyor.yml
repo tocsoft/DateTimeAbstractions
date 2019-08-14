@@ -4,12 +4,12 @@ init:
   - git config --global core.autocrlf true  # otherwise we have newline errors
 
 install:
-  - choco install gitversion.portable -pre -y
+  - dotnet tool install --global GitVersion.Tool --version 5.0.1
 
 before_build:
   - cmd: dotnet --version
   - cmd: dotnet restore
-  - ps: gitversion /l console /output buildserver
+  - cmd: dotnet gitversion /l console /output buildserver
 
 build_script:
   - cmd: build.cmd
