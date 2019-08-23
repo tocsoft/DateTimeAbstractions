@@ -70,7 +70,7 @@ namespace Tocsoft.DateTimeAbstractions
 
         private static void Pop()
         {
-            clockStack.Value = clockStack.Value.Pop();
+            clockStack.Value = clockStack.Value?.Pop();
         }
 
         private sealed class PopWhenDisposed : IDisposable
