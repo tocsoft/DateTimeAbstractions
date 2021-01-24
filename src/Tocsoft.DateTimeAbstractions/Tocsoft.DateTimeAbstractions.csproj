@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- marked as not visible aand for it not to include  -->
+    <!-- marked as not visible and for it not to include  -->
     <ProjectReference Include="..\Tocsoft.DateTimeAbstractions.Analyzer\Tocsoft.DateTimeAbstractions.Analyzer.csproj" Visible="false" SkipGetTargetFrameworkProperties="true">
       <PrivateAssets>All</PrivateAssets>
       <ExcludeAssets>All</ExcludeAssets>
@@ -26,8 +26,10 @@
     <Authors>Tocsoft</Authors>
     <Company />
     <Product>DateTimeAbstractions</Product>
-    <Description>DateTimeAbstractions is an testable alternative to the static methods on DateTime and DateTimeOffset. 
-Includes an analyzer/codefix finding usages of DateTime to replaces it with out testable alternative.</Description>
+    <Description>
+      DateTimeAbstractions is an testable alternative to the static methods on DateTime and DateTimeOffset.
+      Includes an analyzer/codefix finding usages of DateTime to replaces it with out testable alternative.
+    </Description>
     <PackageTags>DateTimeOffset DateTime Testing UnitTest</PackageTags>
     <PackageProjectUrl>https://github.com/tocsoft/DateTimeAbstractions</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tocsoft/DateTimeAbstractions</RepositoryUrl>
@@ -37,20 +39,26 @@ Includes an analyzer/codefix finding usages of DateTime to replaces it with out 
     <None Include="$(AnlyzersOutputDir)\tools\*.ps1" Pack="true" PackagePath="tools" Visible="false" />
     <None Include="$(AnlyzersOutputDir)\Tocsoft.DateTimeAbstractions.Analyzer.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
   </ItemGroup>
-  
+
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\Release\netstandard2.0\Tocsoft.DateTimeAbstractions.xml</DocumentationFile>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netstandard2.0\Tocsoft.DateTimeAbstractions.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" Visible="false" />
+
+    <PackageReference Include="MinVer" Version="2.4.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
