@@ -127,7 +127,10 @@ namespace TestHelper
 
             // after applying all of the code fixes, compare the resulting string to the inputted one
             string actual = GetStringFromDocument(document);
-            Assert.Equal(newSource, actual);
+            Assert.Equal(this.NormalizeNewLines(newSource), this.NormalizeNewLines(actual));
         }
+
+        private string NormalizeNewLines(string text)
+            => text.Replace("\r\n", "\n");
     }
 }
