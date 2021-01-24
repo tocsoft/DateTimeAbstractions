@@ -85,7 +85,6 @@ namespace Tocsoft.DateTimeAbstractions.Tests
 
         private async Task RunTest(int count)
         {
-
             var targetTime = TimeSpan.FromMilliseconds(12312456);
             targetTime = targetTime + TimeSpan.FromMinutes(count);
 

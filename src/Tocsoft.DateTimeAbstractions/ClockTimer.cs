@@ -41,7 +41,7 @@ namespace Tocsoft.DateTimeAbstractions
         }
 
         /// <summary>
-        /// Pins the specified date/time retuned to the current time until the disposable is disposed.
+        /// Pins the specified date/time returned to the current time until the disposable is disposed.
         /// </summary>
         /// <param name="elapsed">The date and time to the clock.</param>
         /// <returns>The disposer that manages the lifetime of the scoped pinned value.</returns>
@@ -144,35 +144,35 @@ namespace Tocsoft.DateTimeAbstractions
         /// <summary>
         /// Gets the total elapsed time measured by the current instance.
         /// </summary>
-        public TimeSpan Elapsed => stopwatch?.Elapsed ?? stopwatchInterface.Elapsed;
+        public TimeSpan Elapsed => this.stopwatch?.Elapsed ?? this.stopwatchInterface.Elapsed;
 
         /// <summary>
         /// Gets the total elapsed time measured by the current instance, in milliseconds.
         /// </summary>
-        public long ElapsedMilliseconds => stopwatch?.ElapsedMilliseconds ?? stopwatchInterface.ElapsedMilliseconds;
+        public long ElapsedMilliseconds => this.stopwatch?.ElapsedMilliseconds ?? this.stopwatchInterface.ElapsedMilliseconds;
 
         /// <summary>
         /// Gets the total elapsed time measured by the current instance, in timer ticks.
         /// </summary>
-        public long ElapsedTicks => stopwatch?.ElapsedTicks ?? stopwatchInterface.ElapsedTicks;
+        public long ElapsedTicks => this.stopwatch?.ElapsedTicks ?? this.stopwatchInterface.ElapsedTicks;
 
         /// <summary>
         /// Gets a value indicating whether the <see cref="ClockTimer"/> timer is running.
         /// </summary>
-        public bool IsRunning => stopwatch?.IsRunning ?? stopwatchInterface.IsRunning;
+        public bool IsRunning => this.stopwatch?.IsRunning ?? this.stopwatchInterface.IsRunning;
 
         /// <summary>
         /// Stops time interval measurement and resets the elapsed time to zero.
         /// </summary>
         public void Reset()
         {
-            if (stopwatch is object)
+            if (this.stopwatch is object)
             {
-                stopwatch.Reset();
+                this.stopwatch.Reset();
             }
             else
             {
-                stopwatchInterface.Reset();
+                this.stopwatchInterface.Reset();
             }
         }
 
@@ -181,13 +181,13 @@ namespace Tocsoft.DateTimeAbstractions
         /// </summary>
         public void Restart()
         {
-            if (stopwatch is object)
+            if (this.stopwatch is object)
             {
-                stopwatch.Restart();
+                this.stopwatch.Restart();
             }
             else
             {
-                stopwatchInterface.Restart();
+                this.stopwatchInterface.Restart();
             }
         }
 
@@ -196,13 +196,13 @@ namespace Tocsoft.DateTimeAbstractions
         /// </summary>
         public void Start()
         {
-            if (stopwatch is object)
+            if (this.stopwatch is object)
             {
-                stopwatch.Start();
+                this.stopwatch.Start();
             }
             else
             {
-                stopwatchInterface.Start();
+                this.stopwatchInterface.Start();
             }
         }
 
@@ -211,76 +211,59 @@ namespace Tocsoft.DateTimeAbstractions
         /// </summary>
         public void Stop()
         {
-            if (stopwatch is object)
+            if (this.stopwatch is object)
             {
-                stopwatch.Stop();
+                this.stopwatch.Stop();
             }
             else
             {
-                stopwatchInterface.Stop();
+                this.stopwatchInterface.Stop();
             }
         }
 
         /// <summary>
-        /// Interface representing the concretet implmentaion of a ClockTimer.
+        /// Interface representing a concrete implementation of a ClockTimer.
         /// </summary>
         public interface IPinnedClockTimer
         {
-            //
-            // Summary:
-            //     Gets the total elapsed time measured by the current instance.
-            //
-            // Returns:
-            //     A read-only System.TimeSpan representing the total elapsed time measured by the
-            //     current instance.
+            /// <summary>
+            /// Gets the total elapsed time measured by the current instance.
+            /// </summary>
             public TimeSpan Elapsed { get; }
 
-            //
-            // Summary:
-            //     Gets the total elapsed time measured by the current instance, in milliseconds.
-            //
-            // Returns:
-            //     A read-only long integer representing the total number of milliseconds measured
-            //     by the current instance.
+            /// <summary>
+            /// Gets the total elapsed time measured by the current instance, in milliseconds.
+            /// </summary>
             public long ElapsedMilliseconds { get; }
 
-            //
-            // Summary:
-            //     Gets the total elapsed time measured by the current instance, in timer ticks.
-            //
-            // Returns:
-            //     A read-only long integer representing the total number of timer ticks measured
-            //     by the current instance.
+            /// <summary>
+            /// Gets the total elapsed time measured by the current instance, in timer ticks.
+            /// </summary>
             public long ElapsedTicks { get; }
 
-            //
-            // Summary:
-            //     Gets a value indicating whether the System.Diagnostics.Stopwatch timer is running.
-            //
-            // Returns:
-            //     true if the System.Diagnostics.Stopwatch instance is currently running and measuring
-            //     elapsed time for an interval; otherwise, false.
+            /// <summary>
+            ///  Gets a value indicating whether the System.Diagnostics.Stopwatch timer is running.
+            /// </summary>
             public bool IsRunning { get; }
 
-            //
-            // Summary:
-            //     Stops time interval measurement and resets the elapsed time to zero.
+            /// <summary>
+            /// Stops time interval measurement and resets the elapsed time to zero.
+            /// </summary>
             public void Reset();
 
-            //
-            // Summary:
-            //     Stops time interval measurement, resets the elapsed time to zero, and starts
-            //     measuring elapsed time.
+            /// <summary>
+            /// Stops time interval measurement, resets the elapsed time to zero, and starts measuring elapsed time.
+            /// </summary>
             public void Restart();
 
-            //
-            // Summary:
-            //     Starts, or resumes, measuring elapsed time for an interval.
+            /// <summary>
+            /// Starts, or resumes, measuring elapsed time for an interval.
+            /// </summary>
             public void Start();
 
-            //
-            // Summary:
-            //     Stops measuring elapsed time for an interval.
+            /// <summary>
+            /// Stops measuring elapsed time for an interval.
+            /// </summary>
             public void Stop();
         }
     }

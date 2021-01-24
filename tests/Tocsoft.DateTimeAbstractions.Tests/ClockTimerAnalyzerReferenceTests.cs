@@ -93,7 +93,6 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer.Test
                        }
             };
 
-
             this.VerifyCSharpDiagnostic(test, expected);
         }
 

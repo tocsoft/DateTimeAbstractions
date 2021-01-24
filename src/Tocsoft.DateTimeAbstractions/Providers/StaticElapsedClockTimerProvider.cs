@@ -7,7 +7,6 @@ using Tocsoft.DateTimeAbstractions.Providers;
 
 namespace Tocsoft.DateTimeAbstractions
 {
-
     internal sealed class StaticElapsedClockTimerProvider : ClockTimerProvider
     {
         private readonly TimeSpan elapsed;
@@ -28,11 +27,11 @@ namespace Tocsoft.DateTimeAbstractions
                 this.elapsed = elapsed;
             }
 
-            public TimeSpan Elapsed => elapsed;
+            public TimeSpan Elapsed => this.elapsed;
 
-            public long ElapsedMilliseconds => (long)elapsed.TotalMilliseconds;
+            public long ElapsedMilliseconds => (long)this.elapsed.TotalMilliseconds;
 
-            public long ElapsedTicks => elapsed.Ticks;
+            public long ElapsedTicks => this.elapsed.Ticks;
 
             public bool IsRunning { get; private set; } = false;
 
@@ -48,12 +47,12 @@ namespace Tocsoft.DateTimeAbstractions
 
             public void Start()
             {
-                IsRunning = true;
+                this.IsRunning = true;
             }
 
             public void Stop()
             {
-                IsRunning = false;
+                this.IsRunning = false;
             }
         }
     }

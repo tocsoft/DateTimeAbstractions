@@ -16,6 +16,6 @@ namespace Tocsoft.DateTimeAbstractions
             this.pinnedClockTimer = pinnedClockTimer;
         }
 
-        public override ClockTimer Create() => new ClockTimer(pinnedClockTimer);
+        public override ClockTimer Create() => new ClockTimer(this.pinnedClockTimer);
     }
 }

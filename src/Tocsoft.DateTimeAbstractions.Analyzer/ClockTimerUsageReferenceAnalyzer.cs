@@ -96,7 +96,6 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer
                                       declarator.Symbol.Type.Name,
                                       clockTimerType?.Name));
                         }
-
                     }, OperationKind.VariableDeclaration);
             });
         }
