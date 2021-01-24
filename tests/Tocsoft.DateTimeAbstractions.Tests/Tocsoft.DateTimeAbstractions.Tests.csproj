@@ -1,12 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject />
-    <VersionPrefix Condition="$(packageversion) != ''">$(packageversion)</VersionPrefix>
-    <VersionPrefix Condition="$(packageversion) == ''">0.0.1</VersionPrefix>
     <DebugType Condition="$(codecov) != ''">full</DebugType>
     <DebugType Condition="$(codecov) == ''">portable</DebugType>
     <DebugSymbols>True</DebugSymbols>

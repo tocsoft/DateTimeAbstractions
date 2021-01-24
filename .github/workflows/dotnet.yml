@@ -19,7 +19,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 3.1.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -33,3 +33,24 @@ jobs:
       with:
         name: packages
         path: ./release/*
+  publish:
+    needs : [build]
+    runs-on: ubuntu-latest
+    if: (github.event_name == 'push')
+
+    steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v2.0.4
+      with:
+        name: packages
+        path: packages
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+    - name: Publish to Myget
+      run: dotnet nuget push packages/*.nupkg -s https://www.myget.org/F/tocsoft/api/v2/package -ss https://www.myget.org/F/tocsoft/symbols/api/v2/package -k ${{secrets.MYGET_KEY}}
+      
+    - name: Publish to nuget
+      if: contains(github.ref, 'refs/tags/')
+      run: echo "publish to nuget here!!!"

@@ -4,28 +4,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <DebugType Condition="$(codecov) != ''">full</DebugType>
-    <DebugType Condition="$(codecov) == ''">portable</DebugType>
+    <MinVerTagPrefix>v</MinVerTagPrefix>
     <DebugSymbols>True</DebugSymbols>
-    <VersionPrefix Condition="$(packageversion) != ''">$(packageversion)</VersionPrefix>
-    <VersionPrefix Condition="$(packageversion) == ''">0.0.1</VersionPrefix>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
-  
-  <PropertyGroup>
-    <PackageId>Tocsoft.DateTimeAbstractions.Analyzer</PackageId>
-    <Authors>Tocsoft</Authors>
-    <PackageLicenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</PackageLicenseUrl>
-    <PackageProjectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</PackageProjectUrl>
-    <PackageIconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</PackageIconUrl>
-    <RepositoryUrl>http://REPOSITORY_URL_HERE_OR_DELETE_THIS_LINE</RepositoryUrl>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description>Tocsoft.DateTimeAbstractions.Analyzer</Description>
-    <PackageReleaseNotes>Summary of changes made in this release of the package.</PackageReleaseNotes>
-    <Copyright>Copyright</Copyright>
-    <PackageTags>Tocsoft.DateTimeAbstractions.Analyzer, analyzers</PackageTags>
-    <NoPackageAnalysis>true</NoPackageAnalysis>
-  </PropertyGroup>
-   
+
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="2.6.1" PrivateAssets="all" />
     <PackageReference Update="NETStandard.Library" PrivateAssets="all" />
@@ -55,6 +38,11 @@
     <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" Visible="false" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2">
       <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+
+    <PackageReference Include="MinVer" Version="2.4.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 
