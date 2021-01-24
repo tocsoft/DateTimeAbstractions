@@ -6,21 +6,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <MinVerTagPrefix>v</MinVerTagPrefix>
     <DebugSymbols>True</DebugSymbols>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <PackageId>Tocsoft.DateTimeAbstractions.Analyzer</PackageId>
-    <Authors>Tocsoft</Authors>
-    <PackageLicenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</PackageLicenseUrl>
-    <PackageProjectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</PackageProjectUrl>
-    <PackageIconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</PackageIconUrl>
-    <RepositoryUrl>http://REPOSITORY_URL_HERE_OR_DELETE_THIS_LINE</RepositoryUrl>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description>Tocsoft.DateTimeAbstractions.Analyzer</Description>
-    <PackageReleaseNotes>Summary of changes made in this release of the package.</PackageReleaseNotes>
-    <Copyright>Copyright</Copyright>
-    <PackageTags>Tocsoft.DateTimeAbstractions.Analyzer, analyzers</PackageTags>
-    <NoPackageAnalysis>true</NoPackageAnalysis>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>

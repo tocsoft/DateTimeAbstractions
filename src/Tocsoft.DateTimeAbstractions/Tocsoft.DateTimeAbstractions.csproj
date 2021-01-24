@@ -23,14 +23,12 @@
     <Authors>Tocsoft</Authors>
     <Company />
     <Product>DateTimeAbstractions</Product>
-    <Description>
-      DateTimeAbstractions is an testable alternative to the static methods on DateTime and DateTimeOffset.
-      Includes an analyzer/codefix finding usages of DateTime to replaces it with out testable alternative.
-    </Description>
-    <PackageTags>DateTimeOffset DateTime Testing UnitTest</PackageTags>
+    <Description>DateTimeAbstractions is an testable alternative to the static methods on DateTime and DateTimeOffset.
+Includes an analyzer/codefix finding usages of DateTime to replaces it with out testable alternative.</Description>
+    <PackageTags>DateTimeOffset DateTime Testing UnitTest Stopwatch</PackageTags>
     <PackageProjectUrl>https://github.com/tocsoft/DateTimeAbstractions</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tocsoft/DateTimeAbstractions</RepositoryUrl>
-    <PackageLicenseUrl>https://github.com/tocsoft/DateTimeAbstractions/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
     <None Include="$(AnlyzersOutputDir)\tools\*.ps1" Pack="true" PackagePath="tools" Visible="false" />
