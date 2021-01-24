@@ -50,3 +50,7 @@ jobs:
         dotnet-version: 3.1.x
     - name: Publish to Myget
       run: dotnet nuget push packages/*.nupkg -s https://www.myget.org/F/tocsoft/api/v2/package -ss https://www.myget.org/F/tocsoft/symbols/api/v2/package -k ${{secrets.MYGET_KEY}}
+      
+    - name: Publish to nuget
+      if: contains(github.ref, 'refs/tags/')
+      run: echo "publish to nuget here!!!"
