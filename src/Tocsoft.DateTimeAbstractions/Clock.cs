@@ -8,7 +8,7 @@ using Tocsoft.DateTimeAbstractions.Providers;
 namespace Tocsoft.DateTimeAbstractions
 {
     /// <summary>
-    /// Provides pinnable and testable scoped access to DateTime static properties.
+    /// Provides pinable and testable scoped access to DateTime static properties.
     /// </summary>
     public static class Clock
     {
@@ -20,6 +20,11 @@ namespace Tocsoft.DateTimeAbstractions
         {
             get
             {
+                if (clockStack.Value == null)
+                {
+                    return DefaultProvider;
+                }
+
                 clockStack.Value = clockStack.Value ?? ImmutableStack.Create<DateTimeProvider>();
                 if (!clockStack.Value.IsEmpty)
                 {

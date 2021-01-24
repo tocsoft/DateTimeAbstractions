@@ -129,4 +129,22 @@
     <value>DateTime static properties are not testable</value>
     <comment>The title of the diagnostic.</comment>
   </data>
+  <data name="ClockTimerAnalyzerDescription" xml:space="preserve">
+    <value>Stopwatch is not testable</value>
+  </data>
+  <data name="ClockTimerAnalyzer_InvocationMessageFormat" xml:space="preserve">
+    <value>Do not call {0}.{1} as they are not testable, use an abstraction instead.</value>
+  </data>
+  <data name="ClockTimerAnalyzer_InvocationMessageFormat_DirectToClockTimer" xml:space="preserve">
+    <value>Do not call {0}.{1} as they are not testable, use an abstraction like the available {2} class instead.</value>
+  </data>
+  <data name="ClockTimerTitle" xml:space="preserve">
+    <value>Stopwatch is not testable</value>
+  </data>
+  <data name="ClockTimerTypeAnalyzer_ReferenceMessageFormat" xml:space="preserve">
+    <value>Do not use {0} as it is not testable, use an abstraction instead.</value>
+  </data>
+  <data name="ClockTimerTypeAnalyzer_ReferenceMessageFormat_DirectToClockTimer" xml:space="preserve">
+    <value>Do not use {0} as it is not testable, use an abstraction like the available {1} class instead.</value>
+  </data>
 </root>

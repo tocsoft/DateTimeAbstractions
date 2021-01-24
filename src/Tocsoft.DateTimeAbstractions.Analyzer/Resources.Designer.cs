@@ -10,7 +10,6 @@
 
 namespace Tocsoft.DateTimeAbstractions.Analyzer {
     using System;
-    using System.Reflection;
     
     
     /// <summary>
@@ -20,7 +19,7 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -40,7 +39,7 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Tocsoft.DateTimeAbstractions.Analyzer.Resources", typeof(Resources).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Tocsoft.DateTimeAbstractions.Analyzer.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -85,6 +84,60 @@ namespace Tocsoft.DateTimeAbstractions.Analyzer {
         internal static string AnalyzerTitle {
             get {
                 return ResourceManager.GetString("AnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not call {0}.{1} as they are not testable, use an abstraction instead..
+        /// </summary>
+        internal static string ClockTimerAnalyzer_InvocationMessageFormat {
+            get {
+                return ResourceManager.GetString("ClockTimerAnalyzer_InvocationMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not call {0}.{1} as they are not testable, use an abstraction like the available {2} class instead..
+        /// </summary>
+        internal static string ClockTimerAnalyzer_InvocationMessageFormat_DirectToClockTimer {
+            get {
+                return ResourceManager.GetString("ClockTimerAnalyzer_InvocationMessageFormat_DirectToClockTimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopwatch is not testable.
+        /// </summary>
+        internal static string ClockTimerAnalyzerDescription {
+            get {
+                return ResourceManager.GetString("ClockTimerAnalyzerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopwatch is not testable.
+        /// </summary>
+        internal static string ClockTimerTitle {
+            get {
+                return ResourceManager.GetString("ClockTimerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not use {0} as it is not testable, use an abstraction instead..
+        /// </summary>
+        internal static string ClockTimerTypeAnalyzer_ReferenceMessageFormat {
+            get {
+                return ResourceManager.GetString("ClockTimerTypeAnalyzer_ReferenceMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not use {0} as it is not testable, use an abstraction like the available {1} class instead..
+        /// </summary>
+        internal static string ClockTimerTypeAnalyzer_ReferenceMessageFormat_DirectToClockTimer {
+            get {
+                return ResourceManager.GetString("ClockTimerTypeAnalyzer_ReferenceMessageFormat_DirectToClockTimer", resourceCulture);
             }
         }
     }
