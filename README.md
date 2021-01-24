@@ -44,6 +44,8 @@ You probably aren't using DateTime.Now in you code so how can this library help?
 | `DateTimeOffset.UtcNow`| `ClockOffset.UtcNow`             |
 > We include warnings and code fixes for all these mappings.
 
+In addition to the `DateTime` set of APIs we also include a testable wrapper around using the `Stopwatch` class in the form of the `ClockTimer` as with the `Clock` APIs we support pinning for testing purposes.
+
 ### The Team
 
 Lead
